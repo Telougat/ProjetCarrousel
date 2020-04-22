@@ -13,6 +13,23 @@ $(document).ready(function() {
             success : function(response){
                 files = response;
                 displayList();
+
+
+                $(".deleteButton").click( "click", function () {
+                    console.log($(this).data('link'));
+
+                    $.post("/api/deletefile",
+                        { filename: $(this).data('link') } )
+                        .done(function()
+                        {
+                            getFiles();
+                        })
+                        .error(function () {
+                            console.log('Erreur');
+                        });
+                });
+
+
             },
             error: function(response){
                 console.log('Erreur');
@@ -26,12 +43,12 @@ $(document).ready(function() {
 
         for (let x = 2; x < (Object.keys(files).length + 2); x++)
         {
-            list += '<div class="font-bold text-xl flex flex-col justify-center mx-4 mb-4">' + '<img class="h-64 w-64" src="photos/' + files[x] + '" alt="' + files[x] + '">' + '<button class="mt-2 bg-blue-500 p-1 rounded-lg">Supprimer</button></div>';
+            list += '<div class="font-bold text-xl flex flex-col justify-center mx-4 mb-4">' + '<img class="h-64 w-64" src="photos/' + files[x] + '" alt="' + files[x] + '">' + '<button data-link="' + files[x] + '" class="deleteButton mt-2 bg-blue-500 p-1 rounded-lg">Supprimer</button></div>';
         }
 
-        $('#list').append(list);
+        $('#list').html(list);
     }
 
     getFiles();
-
 });
+
