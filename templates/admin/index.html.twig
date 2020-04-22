@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+    <div>
+        <h1>Bienvenue dans l'interface admin</h1>
+
+
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label>Select a file:</label>
+            <input type="file" name="files[]" multiple><br><br>
+            <input type="submit">
+        </form>
+
+    </div>
+
+    <div id="list" class="mt-10 flex">
+
+    </div>
+
+{% endblock %}
