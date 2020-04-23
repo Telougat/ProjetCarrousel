@@ -36,6 +36,30 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @route("/api/generate", name="generate", methods={"POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function generateJson(Request $request)
+    {
+        $filesystem = new Filesystem();
+        $jsonArray = array();
+
+        $jsonArray = $request->getContent();
+
+        try {
+            $filesystem->dumpFile('../storage/carrousel.json', $jsonArray);
+        }
+        catch(\Exception $e)
+        {
+            throw $this->createNotFoundException("Erreur lors de l'enregistrement des données");
+        }
+
+
+        return $this->json("écriture des données OK");
+    }
+
+    /**
      * @Route("/api/deletefile", name="deleteFile", methods={"POST"})
      * @param Request $request
      * @return Response

@@ -8,6 +8,7 @@
 /var/
 /vendor/
 /public/photos/
+/node_modules/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
