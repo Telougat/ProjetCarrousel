@@ -26,13 +26,15 @@
   },
   "homepage": "https://github.com/Telougat/ProjetCarrousel#readme",
   "dependencies": {
+    "bezier-easing": "^2.1.0",
     "cropperjs": "^1.5.6",
     "cross-env": "^7.0.2",
     "gsap": "^3.2.6",
     "jquery": "^3.5.0",
     "jquery-cropper": "^1.0.1",
     "kenburns": "^2.0.3",
-    "laravel-mix": "^5.0.4"
+    "laravel-mix": "^5.0.4",
+    "rect-crop": "0.0.0"
   },
   "devDependencies": {
     "vue-template-compiler": "^2.6.11"

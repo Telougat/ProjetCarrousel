@@ -20533,9 +20533,14 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var rect_crop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rect-crop */ "./node_modules/rect-crop/index.js");
+/* harmony import */ var rect_crop__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rect_crop__WEBPACK_IMPORTED_MODULE_1__);
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'bezier-easing'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var KenBurns = __webpack_require__(/*! kenburns */ "./node_modules/kenburns/lib/index.js");
+
+
 
  // Ajax function : get JSON data for built the carrousel
 
@@ -20547,7 +20552,7 @@ $('document').ready(function () {
     var div = document.getElementById('div');
     var kenBurns = new KenBurns.DOM(div);
     console.log(kenBurns);
-    kenBurns.animate(image, rectCrop(0.4, [0.15, 0.38]), rectCrop.largest, 5000, bezierEasing(0.6, 0.0, 1.0, 1.0));
+    kenBurns.animate(image, rect_crop__WEBPACK_IMPORTED_MODULE_1___default()(0.4, [0.15, 0.38]), rect_crop__WEBPACK_IMPORTED_MODULE_1___default.a.largest, 5000, !(function webpackMissingModule() { var e = new Error("Cannot find module 'bezier-easing'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(0.6, 0.0, 1.0, 1.0));
   };
 
   var tl = gsap__WEBPACK_IMPORTED_MODULE_0__["gsap"].timeline();
@@ -20564,16 +20569,6 @@ $('document').ready(function () {
     scale: 0.1
   });
   tl2.to("#test", {
-    duration: 5,
-    x: -2000,
-    scale: 0.1
-  }, ">4");
-  tl2.from("#test2", {
-    duration: 5,
-    x: 2000,
-    scale: 0.1
-  });
-  tl2.to("#test2", {
     duration: 5,
     x: -2000,
     scale: 0.1
