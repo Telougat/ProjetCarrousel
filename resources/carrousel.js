@@ -1,6 +1,8 @@
 const $ = require('jquery');
 const KenBurns = require('kenburns');
 import { gsap } from 'gsap';
+import rectCrop from "rect-crop";
+import bezierEasing from "bezier-easing";
 
 // Ajax function : get JSON data for built the carrousel
 $('document').ready(function(){
@@ -26,8 +28,6 @@ $('document').ready(function(){
 
     tl2.from("#test", {duration :5, x:2000, scale: 0.1 });
     tl2.to("#test", {duration :5, x:-2000, scale: 0.1 }, ">4");
-    tl2.from("#test2", {duration :5, x:2000, scale: 0.1 });
-    tl2.to("#test2", {duration :5, x:-2000, scale: 0.1 }, ">4");
 
 
     function carrousel(){
