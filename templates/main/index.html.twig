@@ -3,19 +3,72 @@
 {% block title %}Hello MainController!{% endblock %}
 
 {% block body %}
+
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+.header {
+  background-color: #c3c3c3;
+  padding: 40px;
+  text-align: center;
+  margin-bottom : 2em;
+}
+
+.footer {
+    background-color: #c3c3c3;
+    padding: 50px;
+    text-align: center;
+    margin-top: 2em;
+}
 </style>
-
-<div class="example-wrapper">
-    <h1 class="font-bold underline">Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/carrousel/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/carrousel/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
-    </ul>
+<!-- header-->
+<div class="header">
+  
+    <h1 style="font-size : 50px">Un Diaporama avec l'effet Ken Burns</h1>
+    <p>Une animation pas comme les autres par <span style="font-weight: bold">Lorenzo Lagoutte</span> et <span style="font-weight: bold">Stéphane Lavarie</span></p>
+  
 </div>
-<div id="myCarrousel"></div>
+<!-- Carousel -->
+<div class="flex justify-center bg-gray-200">
+  <div class="flex justify-center border-solid border-2 bg-gray-400 border-gray-600 w-1/2 sm:w-auto md:w-full lg:w-32 xl:w-3/4 overflow-hidden" style=" border-radius: 25px;">
+    <div id="div">
+      <img id="image" src="photos/800.jpg">
+    </div>
+  </div>
+</div>
+<!-- footer-->
+<div class ="footer"></div>
+
+<script>
+  
+    image = document.getElementById('image');
+    image.onload = () => {
+      console.log(image);
+    var div = document.getElementById('div');
+    var kenBurns = new KenBurnsDOM(div);
+    console.log(kenBurns)
+    kenBurns.animate(
+      image,
+      rectCrop(0.4, [0.15, 0.38]),
+      rectCrop.largest,
+      5000,
+      bezierEasing(0.6, 0.0, 1.0, 1.0)
+    );
+  };
+
+  var tl = gsap.timeline();
+  tl.from(".header", {duration :2, opacity: 0, scale: 0.3,  ease:"elastic"});
+  var tl2 = gsap.timeline();
+
+  tl2.from("#test", {duration :5, x:2000, scale: 0.1 });
+  tl2.to("#test", {duration :5, x:-2000, scale: 0.1 }, ">4");
+  tl2.from("#test2", {duration :5, x:2000, scale: 0.1 });
+  tl2.to("#test2", {duration :5, x:-2000, scale: 0.1 }, ">4");
+
+
+  //tl2.to(".test2", {duration :2, opacity: 0, scale: 0.1});
+
+</script>
+
+{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('js/carrousel.js') }}"></script>
 {% endblock %}
