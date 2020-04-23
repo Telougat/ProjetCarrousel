@@ -14781,7 +14781,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/carrousel/resources/files.js */"./resources/files.js");
+module.exports = __webpack_require__(/*! D:\wamp\www\ProjetCarrousel\resources\files.js */"./resources/files.js");
 
 
 /***/ })

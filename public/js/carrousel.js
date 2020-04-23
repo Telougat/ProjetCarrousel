@@ -20618,7 +20618,7 @@ $('document').ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/carrousel/resources/carrousel.js */"./resources/carrousel.js");
+module.exports = __webpack_require__(/*! D:\wamp\www\ProjetCarrousel\resources\carrousel.js */"./resources/carrousel.js");
 
 
 /***/ })
