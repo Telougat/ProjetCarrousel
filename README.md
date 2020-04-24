@@ -7,9 +7,9 @@ Les outils nécessaires au projet sont :
 - Npm
 - Symfony client (Si vous n'avez pas de serveur)
 
-> Assurez-vous d'avoir les outils cité précedemment
+> Assurez-vous d'avoir les outils cités précédemment
 
-Vous devais ensuite éxecutez les commandes dans l'ordre ci-dessous :
+Vous devez ensuite éxecuter les commandes dans l'ordre ci-dessous :
 
 ```shell script
 
@@ -23,13 +23,13 @@ symfony server:start #Si vous etes en local sans serveur
 
 ```
 
-Vous pouvez ensuite directement accèder au projet.
+Vous pouvez ensuite directement accéder au projet.
 
 Un lien sera prochainement disponible permettant d'essayer le projet sans l'installer.
 
 # Fonctionnement 
 
-Un fichier PDF est disponible afin de vous guider lors de l'utilisation de notre outil.
+Un fichier **notice.pdg** est disponible afin de vous guider lors de l'utilisation de notre outil.
 
 ## Pour analyser le code
 
