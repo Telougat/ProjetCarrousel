@@ -20541,20 +20541,20 @@ var KenBurns = __webpack_require__(/*! kenburns */ "./node_modules/kenburns/lib/
 
 
 
+var carrouselDiv = document.getElementById('carrousel'); //Select carrousel's main div
+
 var carrouselTimeline = gsap__WEBPACK_IMPORTED_MODULE_0__["gsap"].timeline({
   onComplete: function onComplete() {
     this.restart();
   } //Loop into the timeline
 
 }); //Define carrousel's timeline
-
-var carrouselDiv = document.getElementById('carrousel'); //Select carrousel's main div
 // Ajax function : get JSON data for built the carrousel
 
 $('document').ready(function () {
   carrouselTimeline.pause(); //Stop the timeline
 
-  var tl = gsap__WEBPACK_IMPORTED_MODULE_0__["gsap"].timeline(); //Start other timeline animtions (header, etc...)
+  var tl = gsap__WEBPACK_IMPORTED_MODULE_0__["gsap"].timeline(); //Start other timeline animations (header, etc...)
 
   tl.from(".header", {
     duration: 2,
@@ -20563,49 +20563,58 @@ $('document').ready(function () {
     ease: "elastic"
   });
 
-  function addImageToCarrousel(id, imagePath) //Function to create new div+image into the carrousel
+  function addImageToCarrousel(id, imagePath, data) //Function to create new div+image into the carrousel
   {
     var newCanva = document.createElement('div');
     newCanva.id = "kenDiv" + id;
-    newCanva.classList.add("overflow-hidden", "absolute", "hidden");
+    newCanva.classList.add("overflow-hidden", "absolute");
     newCanva.style.height = "600px";
     newCanva.style.width = "800px";
     var newImage = document.createElement("img");
-    newImage.src = "photos/" + imagePath;
-    newImage.id = "kenImage" + id;
     carrouselDiv.appendChild(newCanva);
     newCanva.appendChild(newImage);
+    newImage.src = "photos/" + imagePath;
+    newImage.id = "kenImage" + id;
+    newImage.style.position = "absolute";
+    newCanva.classList.add("hidden");
   }
 
   function launchKenEffect(id, firstZoom, firstX, firstY, secondZoom, secondX, secondY, duration, originWidth, originHeight) //Function to launch instant the ken burns effect
   {
     var canva = document.getElementById('kenDiv' + id);
     var image = document.getElementById('kenImage' + id);
+
+    if (!image.complete) {
+      return false;
+    }
+
     var kenburn = new KenBurns.DOM(canva);
     kenburn.animate(image, rect_crop__WEBPACK_IMPORTED_MODULE_1___default()(firstZoom, [firstX, firstY]), rect_crop__WEBPACK_IMPORTED_MODULE_1___default()(secondZoom, [secondX, secondY]), parseInt(duration) * 1000);
   }
 
   function addImageToTimeline(id, data) // Add image to a timeline
   {
-    carrouselTimeline.add(function () {
-      $('#kenDiv' + id).removeClass('hidden');
-    });
-    carrouselTimeline.from("#kenDiv" + id, {
-      duration: 1.2,
-      x: 2000,
-      scale: 1,
-      ease: "back"
-    }, ">");
-    carrouselTimeline.call(launchKenEffect, [id, data.firstZoom, data.firstX, data.firstY, data.secondZoom, data.secondX, data.secondY, data.duration, document.getElementById('kenImage' + id).naturalWidth, document.getElementById('kenImage' + id).naturalHeight]);
-    carrouselTimeline.to("#kenDiv" + id, {
-      duration: 1.2,
-      x: -2000,
-      scale: 1,
-      ease: "back.in(1.7)"
-    }, ">" + (data.duration - 0.2));
-    carrouselTimeline.add(function () {
-      $('#kenDiv' + id).addClass('hidden');
-    });
+    var image = document.getElementById('kenImage' + id);
+
+    image.onload = function () {
+      carrouselTimeline.add(function () {
+        $('#kenDiv' + id).removeClass('hidden');
+      }, ">0.1");
+      carrouselTimeline.from("#kenDiv" + id, {
+        duration: 1.2,
+        x: 2000,
+        ease: "back"
+      }, ">");
+      carrouselTimeline.call(launchKenEffect, [id, data.firstZoom, data.firstX, data.firstY, data.secondZoom, data.secondX, data.secondY, data.duration, document.getElementById('kenImage' + id).naturalWidth, document.getElementById('kenImage' + id).naturalHeight], "<");
+      carrouselTimeline.to("#kenDiv" + id, {
+        duration: 1.2,
+        x: -2000,
+        ease: "back.in(1.7)"
+      }, ">" + (data.duration - 0.2));
+      carrouselTimeline.add(function () {
+        $('#kenDiv' + id).addClass('hidden');
+      });
+    };
   }
 
   function carrousel() {
@@ -20620,8 +20629,7 @@ $('document').ready(function () {
           var data = response;
 
           for (var x = 0; x < data.length; x++) {
-            console.log('test');
-            addImageToCarrousel(x, data[x].name);
+            addImageToCarrousel(x, data[x].name, data[x]);
             addImageToTimeline(x, data[x]);
           }
 
