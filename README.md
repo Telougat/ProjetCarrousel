@@ -1,6 +1,6 @@
-#Projet Carrousel par Stéphane LAVARIE & Lorenzo LAGOUTTE
+# Projet Carrousel par Stéphane LAVARIE & Lorenzo LAGOUTTE
 
-###Les prérequis pour faire fonctionner le projet
+### Les prérequis pour faire fonctionner le projet
 
 Les outils nécessaires au projet sont :
 - Composer
@@ -27,7 +27,7 @@ Vous pouvez ensuite directement accèder au projet.
 
 Un lien sera prochainement disponible permettant d'essayer le projet sans l'installer.
 
-#Fonctionnement 
+# Fonctionnement 
 
 Un fichier PDF est disponible afin de vous guider lors de l'utilisation de notre outil.
 
