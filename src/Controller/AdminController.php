@@ -22,6 +22,31 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/login", name="login") methods={"POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function login(Request $request)
+    {   
+        $login = $request->request->get('login');
+        $password = $request->request->get('password');
+
+        
+        if($login == "admin" && $password == "admin")
+        {
+
+            return $this->redirectToRoute('admin');
+        }
+        else
+        {
+            return $this->redirectToRoute('index');
+        }
+        
+        return $this->render('login/login.html.twig', [  
+        ]);
+    }
+
 
     /**
      * @Route("/api/list", name="apiFilesList")
@@ -99,7 +124,6 @@ class AdminController extends AbstractController
         {
             throw $this->createNotFoundException("Vous n'avez pas séléctionnez de fichiers ...");
         }
-
 
         foreach ($files as $file)
         {

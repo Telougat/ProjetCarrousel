@@ -7,6 +7,19 @@ import bezierEasing from "bezier-easing";
 // Ajax function : get JSON data for built the carrousel
 $('document').ready(function(){
 
+    let kenImage = document.getElementById('image');
+    let kenDiv = document.getElementById('div');
+
+    let kenburn = new KenBurns.DOM(kenDiv);
+
+    kenburn.animate(
+        kenImage,
+        rectCrop(0.4, [0.2, 0.38]),
+        rectCrop.largest,
+        5000,
+        bezierEasing(0.6, 0.0, 1.0, 1.0)
+    );
+
     let image = document.getElementById('image');
     image.onload = () => {
         console.log(image);
@@ -15,9 +28,9 @@ $('document').ready(function(){
         console.log(kenBurns)
         kenBurns.animate(
             image,
-            rectCrop(0.4, [0.15, 0.38]),
+            rectCrop(0.5,center [1 , 5]),
             rectCrop.largest,
-            5000,
+            3000,
             bezierEasing(0.6, 0.0, 1.0, 1.0)
         );
     };

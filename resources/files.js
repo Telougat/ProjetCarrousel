@@ -39,7 +39,7 @@ function toJson()
     }
 
     let dataString = JSON.stringify(combine);
-
+    
     $.ajax({
         type: "POST",
         dataType: "json",
@@ -47,7 +47,7 @@ function toJson()
         data: dataString,
         contentType: "application/json; charset=utf-8",
         success: function(data){
-            alert('Items added');
+            alert('Votre image '+ combine[0].name+ ' a été ajoutée au diaporama');
         },
         error: function(e){
             console.log(e.message);
@@ -155,6 +155,7 @@ $(document).ready(function() {
 
                         '<div class="md:w-3/4 lg:w-1/2 mt-2 md:mt-0 md:ml-2">' +
                             '<img id="' + (i+1) + '" class="w-full" src="photos/' + $(this).data('link') + '">' +
+                            
                         '</div>' +
 
                         '</div>' +
@@ -166,12 +167,13 @@ $(document).ready(function() {
                             '<input id="duration' + i + '" type="number" value="2" class="text-right mt-2 border-2 px-1 border-black"><br>' +
                             //'<button data-begin="' + i + '" class="deleteSlide bg-black text-white font-bold p-2 mt-8 rounded-lg">Supprimer cette slide</button>' +
                     '</div>' +
-
+                            
                     '</div>' +
 
                     '</div>' +
-
+                    
                     '</div>'
+                    
                     );
 
 

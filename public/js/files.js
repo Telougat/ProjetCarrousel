@@ -14667,7 +14667,7 @@ function toJson() {
     data: dataString,
     contentType: "application/json; charset=utf-8",
     success: function success(data) {
-      alert('Items added');
+      alert('Votre image ' + combine[0].name + ' a été ajoutée au diaporama');
     },
     error: function error(e) {
       console.log(e.message);
