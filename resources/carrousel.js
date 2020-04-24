@@ -17,6 +17,8 @@ $('document').ready(function(){
 
     let tl = gsap.timeline(); //Start other timeline animations (header, etc...)
     tl.from(".header", {duration :2, opacity: 0, scale: 0.3,  ease:"elastic"});
+    tl.from(".loginButton", {duration :1, x: -1500, opacity: 0, scale: 0.3,  ease:"expo"}, "-=1");
+
 
 
     function addImageToCarrousel(id, imagePath, data) //Function to create new div+image into the carrousel
@@ -98,7 +100,5 @@ $('document').ready(function(){
             }
         });
     }
-
-
     carrousel();
 });

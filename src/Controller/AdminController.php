@@ -8,41 +8,81 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
 {
+
+    private $session;
+
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
+
     /**
      * @Route("/admin", name="admin")
      */
     public function index()
     {
+        if (!$this->session->get('login'))
+        {
+            return $this->redirectToRoute('loginget');
+        }
+
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
         ]);
     }
 
     /**
-     * @Route("/login", name="login") methods={"POST"})
+     * @Route("/login", name="loginget", methods={"GET"})
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return Response
      */
-    public function login(Request $request)
+    public function loginget(Request $request)
+    {
+        if ($this->session->get('login'))
+        {
+            return $this->redirectToRoute('admin');
+        }
+
+        return $this->render('login/login.html.twig');
+    }
+
+    /**
+     * @Route("/logout", name="logout", methods={"GET"})
+     * @return Response
+     */
+    public function logout()
+    {
+        $this->session->set('login', false);
+        return $this->redirectToRoute('loginget');
+    }
+
+    /**
+     * @Route("/login", name="loginpost", methods={"POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function loginpost(Request $request)
     {   
         $login = $request->request->get('login');
         $password = $request->request->get('password');
+
         
         if($login == "admin" && $password == "admin")
         {
+            $this->session->set('login', true);
             return $this->redirectToRoute('admin');
         }
         else
         {
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('loginget');
         }
         
-        return $this->render('login/login.html.twig', [  
-        ]);
+        //return $this->render('login/login.html.twig');
     }
 
 
@@ -51,6 +91,12 @@ class AdminController extends AbstractController
      */
     public function filesList()
     {
+
+        if (!$this->session->get('login'))
+        {
+            throw $this->createNotFoundException('Permission denied');
+        }
+
         $list = scandir('photos/');
         unset($list[0]);
         unset($list[1]);
@@ -65,6 +111,11 @@ class AdminController extends AbstractController
      */
     public function generateJson(Request $request)
     {
+        if (!$this->session->get('login'))
+        {
+            throw $this->createNotFoundException('Permission denied');
+        }
+
         $filesystem = new Filesystem();
         $jsonArray = array();
 
@@ -89,6 +140,11 @@ class AdminController extends AbstractController
      */
     public function deleteFile(Request $request)
     {
+        if (!$this->session->get('login'))
+        {
+            throw $this->createNotFoundException('Permission denied');
+        }
+
         $filesystem = new Filesystem();
         $filename = $request->get('filename');
 
@@ -114,6 +170,11 @@ class AdminController extends AbstractController
      */
     public function upload(Request $request)
     {
+        if (!$this->session->get('login'))
+        {
+            throw $this->createNotFoundException('Permission denied');
+        }
+
         $allowedExtensions = ['gif', 'jpeg', 'jpg', 'png'];
 
         $files = $request->files->get('files');

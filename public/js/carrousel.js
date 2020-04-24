@@ -20562,6 +20562,13 @@ $('document').ready(function () {
     scale: 0.3,
     ease: "elastic"
   });
+  tl.from(".loginButton", {
+    duration: 1,
+    x: -1500,
+    opacity: 0,
+    scale: 0.3,
+    ease: "expo"
+  }, "-=1");
 
   function addImageToCarrousel(id, imagePath, data) //Function to create new div+image into the carrousel
   {
@@ -20655,7 +20662,7 @@ $('document').ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\wamp\www\ProjetCarrousel\resources\carrousel.js */"./resources/carrousel.js");
+module.exports = __webpack_require__(/*! /var/www/html/carrousel/resources/carrousel.js */"./resources/carrousel.js");
 
 
 /***/ })
