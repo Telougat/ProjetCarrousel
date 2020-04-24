@@ -14755,7 +14755,7 @@ $(document).ready(function () {
           if (already === true) //Dont push image into the slideshow because he is already present
             return false; //TODO Notify user with a front message.
 
-          $('#effectFrame').append('<div id="Slide' + i + '" class="flex justify-center w-full my-24">' + '<div class="lg:w-3/4 xl:w-1/2 mx-2 md:mx-0 p-8 border-2 rounded-lg">' + '<div class="md:flex">' + '<div class="md:w-3/4 lg:w-1/2">' + '<img id="' + i + '" class="w-full" src="photos/' + $(this).data('link') + '">' + '</div>' + '<div class="md:w-3/4 lg:w-1/2 mt-2 md:mt-0 md:ml-2">' + '<img id="' + (i + 1) + '" class="w-full" src="photos/' + $(this).data('link') + '">' + '</div>' + '</div>' + '<div class="mt-6 flex justify-center">' + '<div class="text-center">' + '<label>Durée d\'affichage (Secondes)</label><br>' + '<input id="duration' + i + '" type="number" value="2" class="text-right mt-2 border-2 px-1 border-black"><br>' + //'<button data-begin="' + i + '" class="deleteSlide bg-black text-white font-bold p-2 mt-8 rounded-lg">Supprimer cette slide</button>' +
+          $('#effectFrame').append('<div id="Slide' + i + '" class="flex justify-center w-full my-24">' + '<div class="lg:w-3/4 xl:w-1/2 mx-2 md:mx-0 p-8 border-2 rounded-lg">' + '<div class="md:flex ">' + '<div class="md:w-3/4 lg:w-1/2">' + '<img id="' + i + '" class="w-full" src="photos/' + $(this).data('link') + '">' + '</div>' + '<div class="md:w-3/4 lg:w-1/2 mt-2 md:mt-0 md:ml-2">' + '<img id="' + (i + 1) + '" class="w-full" src="photos/' + $(this).data('link') + '">' + '</div>' + '</div>' + '<div class="mt-6 flex justify-center">' + '<div class="text-center">' + '<label>Durée d\'affichage (Secondes)</label><br>' + '<input id="duration' + i + '" type="number" value="2" class="text-right mt-2 border-2 px-1 border-black"><br>' + //'<button data-begin="' + i + '" class="deleteSlide bg-black text-white font-bold p-2 mt-8 rounded-lg">Supprimer cette slide</button>' +
           '</div>' + '</div>' + '</div>' + '</div>');
           var first = document.getElementById(i);
           var second = document.getElementById(i + 1);
@@ -14777,7 +14777,7 @@ $(document).ready(function () {
     for (var x = 2; x < Object.keys(files).length + 2; x++) {
       //list += '<div class="h-64 w-64 font-bold text-xl flex flex-col justify-center mx-4 mb-4 text-white">' + '<img class="h-full w-full" src="photos/' + files[x] + '" alt="' + files[x] + '">' + '<button data-link="' + files[x] + '" class="selectButton mt-2 bg-blue-500 p-1 rounded-lg">Selectionner</button><button data-link="' + files[x] + '" class="deleteButton mt-2 bg-blue-500 p-1 rounded-lg">Supprimer</button></div>';
       //list += '<div style="max-height: 600px;" class="w-1/4 overflow-hidden">' + '<img class="w-full" src="photos/' + files[x] + '" alt="' + files[x] + '"></div>';
-      list += '<div style="max-height: 400px;" class="w-1/4 overflow-hidden relative">' + '<img class="object-contains" src="photos/' + files[x] + '">' + '<div class="imgTools hidden absolute top-0 w-full h-full flex flex-col justify-center items-center">' + '<button data-link="' + files[x] + '" class="selectButton cursor-pointer text-white font-bold text-2xl bg-red-500 p-2 rounded-lg">Sélectionner</button>' + '<button data-link="' + files[x] + '" class="deleteButton mt-4 cursor-pointer text-white font-bold text-2xl bg-red-500 p-2 rounded-lg">Supprimer</button>' + '</div>' + '</div>';
+      list += '<div style="max-height: 400px;" class="w-1/4 overflow-hidden relative border-2 rounded-lg">' + '<img class="object-contains" src="photos/' + files[x] + '">' + '<div class="imgTools hidden absolute top-0 w-full h-full flex flex-col justify-center items-center">' + '<button data-link="' + files[x] + '" class="selectButton cursor-pointer text-white font-bold text-2xl bg-red-500 p-2 rounded-lg">Sélectionner</button>' + '<button data-link="' + files[x] + '" class="deleteButton mt-4 cursor-pointer text-white font-bold text-2xl bg-red-500 p-2 rounded-lg">Supprimer</button>' + '</div>' + '</div>';
     }
 
     $('#list').html(list);
@@ -14799,7 +14799,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/carrousel/resources/files.js */"./resources/files.js");
+module.exports = __webpack_require__(/*! D:\wamp\www\ProjetCarrousel\resources\files.js */"./resources/files.js");
 
 
 /***/ })

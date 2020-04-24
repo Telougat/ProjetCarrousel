@@ -31,11 +31,9 @@ class AdminController extends AbstractController
     {   
         $login = $request->request->get('login');
         $password = $request->request->get('password');
-
         
         if($login == "admin" && $password == "admin")
         {
-
             return $this->redirectToRoute('admin');
         }
         else

@@ -7,16 +7,9 @@
     <script src="js/files.js"></script>
 
     <link rel="stylesheet" href="css/cropper.min.css">
-    <style>
-        .header {
-            background-color: #c3c3c3;
-            padding: 40px;
-            text-align: center;
-            margin-bottom : 2em;
-        }
-    </style>
-    <div class="header">
-        <h1 style="font-size : 50px">Interface admin</h1>
+    
+    <div class="flex items-center p-16 mb-8  bg-gray-400">
+        <h1 class="flex-1 text-center"style="font-size : 50px">Interface admin</h1>
     </div>
 
     <div>
@@ -32,17 +25,23 @@
         <h2 style="font-size : 30px; ">Votre gallerie</h2>
     </div>
     <div class="flex justify-center bg-gray-200">
-    <p>Sélectionner une image pour la recadrer</p>
+        <p>Sélectionner une image pour la recadrer</p>
     </div>
     <br><hr><br>
-    
-    <div id="list" class="w-full flex"></div>
+
+    <!-- pictures's galleria -->
+    <div id="list" class="w-full flex col-gap-4"></div>
     <br><hr><br>
-    
-    <div class="flex justify-center"> 
+
+    <!-- cropper picture -->
+    <div id="effectFrame" class="flex flex-col justify-center w-full"></div>
+
+    <div class="flex justify-center col-gap-4 -mt-6 pb-12">
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" id="jsonB">Valider vos cadrages</button>
+        <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 border border-orange-700 rounded" id="jsonB"><a href="/">Retour à votre diaporama</a></button>
     </div>
 
-    <div id="effectFrame" class="flex flex-col justify-center w-full"></div>
+<!-- footer-->
+<div class ="p-40 mt-8 bg-gray-400"></div>
 
 {% endblock %}
