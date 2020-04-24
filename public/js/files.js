@@ -14694,7 +14694,7 @@ function toJson() {
 }
 
 $(document).ready(function () {
-  $('#Validate').attr('disabled', true);
+  $('.validateButton').attr('disabled', true);
 
   function imageToolsAnimations() {
     $("img").mouseenter(function () {
@@ -14767,8 +14767,8 @@ $(document).ready(function () {
           $('html, body').animate({
             scrollTop: $('#Slide' + i).offset().top
           }, 1500);
-          $('#Validate').removeClass('cursor-not-allowed');
-          $('#Validate').attr('disabled', false);
+          $('.validateButton').removeClass('cursor-not-allowed');
+          $('.validateButton').attr('disabled', false);
           i = i + 2;
         });
       },
