@@ -18,9 +18,22 @@ function getCropper(img, key, path) //Return crooper object
         movable: false,
         toggleDragModeOnDblclick: false,
         crop(event) {
-            infos[key] = {"path" : path,"x" : event.detail.x, "y" : event.detail.y, "width": event.detail.width, "height": event.detail.height, "scaleX": event.detail.scaleX, "scaleY": event.detail.scaleY};
+            infos[key] = {"path" : path,"x" : event.detail.x, "y" : event.detail.y, "width": event.detail.width, "height": event.detail.height, "originWidth": img.naturalWidth, "originHeight": img.naturalHeight};
         },
     })
+}
+
+function calculateZoom(width, height, zoomWidth, zoomHeight)
+{
+   /* let origineAera = width * height;
+    let finalAera = zoomWidth * zoomHeight;*/
+
+    return zoomWidth/width;
+}
+
+function calculateDistanceWithTheCenterInPercentage(distance, halfInsideDistance, origin)
+{
+    return (distance + halfInsideDistance) / origin;
 }
 
 function toJson()
@@ -34,7 +47,16 @@ function toJson()
         let second = infos.shift();
         let duration = parseInt($("#duration" + y).val());
 
-        combine.push({"name": first.path, "firstX": first.x, "firstY": first.y, "secondX": second.x, "secondY": second.y, "firstWidth": first.width, "firstHeight": first.height, "secondWidth": second.width, "secondHeight": second.height, "duration": duration});
+        let firstZoom = calculateZoom(first.originWidth, first.originHeight, first.width, first.height);
+        let secondZoom = calculateZoom(second.originWidth, second.originHeight, second.width, second.height);
+
+        let firstW = calculateDistanceWithTheCenterInPercentage(first.x, (first.width / 2), first.originWidth);
+        let firstH = calculateDistanceWithTheCenterInPercentage(first.y, (first.height / 2), first.originHeight);
+
+        let secondW = calculateDistanceWithTheCenterInPercentage(second.x, (second.width / 2), second.originWidth);
+        let secondH = calculateDistanceWithTheCenterInPercentage(second.y, (second.height / 2), second.originHeight);
+
+        combine.push({"name": first.path, "firstX": firstW, "firstY": firstH, "secondX": secondW, "secondY": secondH, "firstWidth": first.width, "firstHeight": first.height, "secondWidth": second.width, "secondHeight": second.height, "duration": duration, "firstZoom": firstZoom, "secondZoom": secondZoom});
         y+=2;
     }
 

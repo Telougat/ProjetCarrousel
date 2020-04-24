@@ -9,6 +9,7 @@
 /vendor/
 /public/photos/
 /node_modules/
+/public/js/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
