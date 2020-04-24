@@ -20562,6 +20562,13 @@ $('document').ready(function () {
     scale: 0.3,
     ease: "elastic"
   });
+  tl.from(".loginButton", {
+    duration: 1,
+    x: -1500,
+    opacity: 0,
+    scale: 0.3,
+    ease: "expo"
+  }, "-=1");
 
   function addImageToCarrousel(id, imagePath) //Function to create new div+image into the carrousel
   {

@@ -36,10 +36,6 @@ class AdminController extends AbstractController
         {
             return $this->redirectToRoute('admin');
         }
-        else
-        {
-            return $this->redirectToRoute('index');
-        }
         
         return $this->render('login/login.html.twig', [  
         ]);
