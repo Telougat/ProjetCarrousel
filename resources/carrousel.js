@@ -14,7 +14,6 @@ $('document').ready(function(){
 
     carrouselTimeline.pause(); //Stop the timeline
 
-
     let tl = gsap.timeline(); //Start other timeline animtions (header, etc...)
     tl.from(".header", {duration :2, opacity: 0, scale: 0.3,  ease:"elastic"});
 
@@ -54,7 +53,7 @@ $('document').ready(function(){
     {
         carrouselTimeline.add(function(){ $('#kenDiv'+id).removeClass('hidden') } );
         carrouselTimeline.from("#kenDiv" + id, {duration :1.2, x:2000, scale: 1, ease: "back"}, (">"));
-        carrouselTimeline.call(launchKenEffect, [id, data.firstZoom, data.firstX, data.firstY, data.secondZoom, data.secondX, data.secondY, data.duration, document.getElementById('kenImage'+id).naturalWidth, document.getElementById('kenImage'+id).naturalHeight], "<");
+        carrouselTimeline.call(launchKenEffect, [id, data.firstZoom, data.firstX, data.firstY, data.secondZoom, data.secondX, data.secondY, data.duration, document.getElementById('kenImage'+id).naturalWidth, document.getElementById('kenImage'+id).naturalHeight]);
         carrouselTimeline.to("#kenDiv" + id, {duration :1.2, x:-2000, scale: 1, ease: "back.in(1.7)"}, (">" + (data.duration-0.2)));
         carrouselTimeline.add(function(){ $('#kenDiv'+id).addClass('hidden') } );
     }
@@ -73,6 +72,7 @@ $('document').ready(function(){
 
                     for(let x=0; x < data.length; x++)
                     {
+                        console.log('test');
                         addImageToCarrousel(x, data[x].name);
                         addImageToTimeline(x, data[x]);
                     }

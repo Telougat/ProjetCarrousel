@@ -20596,7 +20596,7 @@ $('document').ready(function () {
       scale: 1,
       ease: "back"
     }, ">");
-    carrouselTimeline.call(launchKenEffect, [id, data.firstZoom, data.firstX, data.firstY, data.secondZoom, data.secondX, data.secondY, data.duration, document.getElementById('kenImage' + id).naturalWidth, document.getElementById('kenImage' + id).naturalHeight], "<");
+    carrouselTimeline.call(launchKenEffect, [id, data.firstZoom, data.firstX, data.firstY, data.secondZoom, data.secondX, data.secondY, data.duration, document.getElementById('kenImage' + id).naturalWidth, document.getElementById('kenImage' + id).naturalHeight]);
     carrouselTimeline.to("#kenDiv" + id, {
       duration: 1.2,
       x: -2000,
@@ -20620,6 +20620,7 @@ $('document').ready(function () {
           var data = response;
 
           for (var x = 0; x < data.length; x++) {
+            console.log('test');
             addImageToCarrousel(x, data[x].name);
             addImageToTimeline(x, data[x]);
           }

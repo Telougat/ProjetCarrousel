@@ -3,28 +3,10 @@
 {% block title %}Hello MainController!{% endblock %}
 
 {% block body %}
-
-<style>
-.header {
-  background-color: #c3c3c3;
-  padding: 40px;
-  text-align: center;
-  margin-bottom : 2em;
-}
-
-.footer {
-    background-color: #c3c3c3;
-    padding: 50px;
-    text-align: center;
-    margin-top: 2em;
-}
-</style>
 <!-- header-->
-<div class="header">
-  
-    <h1 style="font-size : 50px">Un Diaporama avec l'effet Ken Burns</h1>
-    <p>Une animation pas comme les autres par <span style="font-weight: bold">Lorenzo Lagoutte</span> et <span style="font-weight: bold">Stéphane Lavarie</span></p>
-  
+<div class="header flex items-center p-16 mb-8  bg-gray-400">
+    <h1 class="flex-1 text-center" style="font-size : 50px">Un Diaporama avec l'effet Ken Burns</h1>
+    <p class="text-center">Une animation pas comme les autres par <span style="font-weight: bold">Lorenzo Lagoutte</span> et <span style="font-weight: bold">Stéphane Lavarie</span></p>
 </div>
 <!-- Carousel -->
 <div class="flex justify-center bg-gray-200">
@@ -38,7 +20,7 @@
     </div>-->
 
 <!-- footer-->
-<div class ="footer"></div>
+<div class ="p-12 mt-8 bg-gray-400"></div>
 
 {% endblock %}
 {% block javascripts %}
