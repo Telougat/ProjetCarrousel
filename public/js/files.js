@@ -14629,11 +14629,21 @@ function getCropper(img, key, path) //Return crooper object
         "y": event.detail.y,
         "width": event.detail.width,
         "height": event.detail.height,
-        "scaleX": event.detail.scaleX,
-        "scaleY": event.detail.scaleY
+        "originWidth": img.naturalWidth,
+        "originHeight": img.naturalHeight
       };
     }
   });
+}
+
+function calculateZoom(width, height, zoomWidth, zoomHeight) {
+  /* let origineAera = width * height;
+   let finalAera = zoomWidth * zoomHeight;*/
+  return zoomWidth / width;
+}
+
+function calculateDistanceWithTheCenterInPercentage(distance, halfInsideDistance, origin) {
+  return (distance + halfInsideDistance) / origin;
 }
 
 function toJson() {
@@ -14644,17 +14654,25 @@ function toJson() {
     var first = infos.shift();
     var second = infos.shift();
     var duration = parseInt($("#duration" + y).val());
+    var firstZoom = calculateZoom(first.originWidth, first.originHeight, first.width, first.height);
+    var secondZoom = calculateZoom(second.originWidth, second.originHeight, second.width, second.height);
+    var firstW = calculateDistanceWithTheCenterInPercentage(first.x, first.width / 2, first.originWidth);
+    var firstH = calculateDistanceWithTheCenterInPercentage(first.y, first.height / 2, first.originHeight);
+    var secondW = calculateDistanceWithTheCenterInPercentage(second.x, second.width / 2, second.originWidth);
+    var secondH = calculateDistanceWithTheCenterInPercentage(second.y, second.height / 2, second.originHeight);
     combine.push({
       "name": first.path,
-      "firstX": first.x,
-      "firstY": first.y,
-      "secondX": second.x,
-      "secondY": second.y,
+      "firstX": firstW,
+      "firstY": firstH,
+      "secondX": secondW,
+      "secondY": secondH,
       "firstWidth": first.width,
       "firstHeight": first.height,
       "secondWidth": second.width,
       "secondHeight": second.height,
-      "duration": duration
+      "duration": duration,
+      "firstZoom": firstZoom,
+      "secondZoom": secondZoom
     });
     y += 2;
   }

@@ -20533,51 +20533,80 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var rect_crop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rect-crop */ "./node_modules/rect-crop/index.js");
+/* harmony import */ var rect_crop__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rect_crop__WEBPACK_IMPORTED_MODULE_1__);
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var KenBurns = __webpack_require__(/*! kenburns */ "./node_modules/kenburns/lib/index.js");
 
- // Ajax function : get JSON data for built the carrousel
+
+
+var carrouselTimeline = gsap__WEBPACK_IMPORTED_MODULE_0__["gsap"].timeline({
+  onComplete: function onComplete() {
+    this.restart();
+  } //Loop into the timeline
+
+}); //Define carrousel's timeline
+
+var carrouselDiv = document.getElementById('carrousel'); //Select carrousel's main div
+// Ajax function : get JSON data for built the carrousel
 
 $('document').ready(function () {
-  var image = document.getElementById('image');
+  carrouselTimeline.pause(); //Stop the timeline
 
-  image.onload = function () {
-    console.log(image);
-    var div = document.getElementById('div');
-    var kenBurns = new KenBurns.DOM(div);
-    console.log(kenBurns);
-    kenBurns.animate(image, rectCrop(0.4, [0.15, 0.38]), rectCrop.largest, 5000, bezierEasing(0.6, 0.0, 1.0, 1.0));
-  };
+  var tl = gsap__WEBPACK_IMPORTED_MODULE_0__["gsap"].timeline(); //Start other timeline animtions (header, etc...)
 
-  var tl = gsap__WEBPACK_IMPORTED_MODULE_0__["gsap"].timeline();
   tl.from(".header", {
     duration: 2,
     opacity: 0,
     scale: 0.3,
     ease: "elastic"
   });
-  var tl2 = gsap__WEBPACK_IMPORTED_MODULE_0__["gsap"].timeline();
-  tl2.from("#test", {
-    duration: 5,
-    x: 2000,
-    scale: 0.1
-  });
-  tl2.to("#test", {
-    duration: 5,
-    x: -2000,
-    scale: 0.1
-  }, ">4");
-  tl2.from("#test2", {
-    duration: 5,
-    x: 2000,
-    scale: 0.1
-  });
-  tl2.to("#test2", {
-    duration: 5,
-    x: -2000,
-    scale: 0.1
-  }, ">4");
+
+  function addImageToCarrousel(id, imagePath) //Function to create new div+image into the carrousel
+  {
+    var newCanva = document.createElement('div');
+    newCanva.id = "kenDiv" + id;
+    newCanva.classList.add("overflow-hidden", "absolute", "hidden");
+    newCanva.style.height = "600px";
+    newCanva.style.width = "800px";
+    var newImage = document.createElement("img");
+    newImage.src = "photos/" + imagePath;
+    newImage.id = "kenImage" + id;
+    carrouselDiv.appendChild(newCanva);
+    newCanva.appendChild(newImage);
+  }
+
+  function launchKenEffect(id, firstZoom, firstX, firstY, secondZoom, secondX, secondY, duration, originWidth, originHeight) //Function to launch instant the ken burns effect
+  {
+    var canva = document.getElementById('kenDiv' + id);
+    var image = document.getElementById('kenImage' + id);
+    var kenburn = new KenBurns.DOM(canva);
+    kenburn.animate(image, rect_crop__WEBPACK_IMPORTED_MODULE_1___default()(firstZoom, [firstX, firstY]), rect_crop__WEBPACK_IMPORTED_MODULE_1___default()(secondZoom, [secondX, secondY]), parseInt(duration) * 1000);
+  }
+
+  function addImageToTimeline(id, data) // Add image to a timeline
+  {
+    carrouselTimeline.add(function () {
+      $('#kenDiv' + id).removeClass('hidden');
+    });
+    carrouselTimeline.from("#kenDiv" + id, {
+      duration: 1.2,
+      x: 2000,
+      scale: 1,
+      ease: "back"
+    }, ">");
+    carrouselTimeline.call(launchKenEffect, [id, data.firstZoom, data.firstX, data.firstY, data.secondZoom, data.secondX, data.secondY, data.duration, document.getElementById('kenImage' + id).naturalWidth, document.getElementById('kenImage' + id).naturalHeight], "<");
+    carrouselTimeline.to("#kenDiv" + id, {
+      duration: 1.2,
+      x: -2000,
+      scale: 1,
+      ease: "back.in(1.7)"
+    }, ">" + (data.duration - 0.2));
+    carrouselTimeline.add(function () {
+      $('#kenDiv' + id).addClass('hidden');
+    });
+  }
 
   function carrousel() {
     $.ajax({
@@ -20589,14 +20618,13 @@ $('document').ready(function () {
       success: function success(response, status) {
         if (typeof response != "undefined") {
           var data = response;
-          var html = "";
-          console.log(data);
 
           for (var x = 0; x < data.length; x++) {
-            html = '<input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">' + '<div class="carousel-item absolute opacity-0" style="height:50vh;">' + '<div class="block h-full w-full bg-indigo-500 text-white text-5xl text-center">' + data[x].name + '</div></div>' + '<label for="carousel-3" class="prev control-1 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>' + '<label for="carousel-2" class="next control-1 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>';
+            addImageToCarrousel(x, data[x].name);
+            addImageToTimeline(x, data[x]);
           }
 
-          $('#myCarrousel').append(html);
+          carrouselTimeline.resume(); //Start the carrousel timeline
         }
       },
       error: function error(response, status) {
