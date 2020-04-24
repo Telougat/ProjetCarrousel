@@ -8,7 +8,7 @@ let infos = [];
 
 let finalJson = [];
 
-function getCropper(img, key, path) //Return crooper object
+function getCropper(img, key, path) //Return cropper object
 {
     return new Cropper(img, {
         viewMode: 3,
@@ -69,7 +69,7 @@ function toJson()
         data: dataString,
         contentType: "application/json; charset=utf-8",
         success: function(data){
-            alert('Votre image '+ combine[0].name+ ' a été ajoutée au diaporama');
+            window.location.href = '/';
         },
         error: function(e){
             console.log(e.message);
@@ -78,6 +78,8 @@ function toJson()
 }
 
 $(document).ready(function() {
+
+    $('.validateButton').attr('disabled', true);
 
     function imageToolsAnimations()
     {
@@ -205,7 +207,17 @@ $(document).ready(function() {
                     [].push.call(object, getCropper(first, i, $(this).data('link')));
                     [].push.call(object, getCropper(second, i+1, $(this).data('link')));
 
-                    makeSlideDeletable();
+                    //makeSlideDeletable(); //TODO: Finish deletable function to delete slides
+
+                    $('html, body').animate({
+
+                        scrollTop: $('#Slide' + i).offset().top
+
+                    }, 1500);
+
+
+                    $('.validateButton').removeClass('cursor-not-allowed');
+                    $('.validateButton').attr('disabled', false);
 
                     i = i+2;
                 });
