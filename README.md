@@ -29,7 +29,7 @@ Un lien sera prochainement disponible permettant d'essayer le projet sans l'inst
 
 # Fonctionnement 
 
-Un fichier **notice.pdg** est disponible afin de vous guider lors de l'utilisation de notre outil.
+Un fichier **notice.pdf** est disponible afin de vous guider lors de l'utilisation de notre outil.
 
 ## Pour analyser le code
 
