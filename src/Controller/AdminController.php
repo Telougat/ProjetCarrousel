@@ -23,7 +23,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/login", name="login") methods={"POST"})
+     * @Route("/login", name="login", methods={"POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
