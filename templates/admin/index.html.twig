@@ -12,11 +12,11 @@
         <h1 class="flex-1 text-center"style="font-size : 50px">Interface admin</h1>
     </div>
 
-    <div>
+    <div class="flex justify-center">
         <form action="/upload" method="post" enctype="multipart/form-data">
             <label>Sélectionner un ou plusieurs fichier(s) :</label>
-            <input class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" type="file" name="files[]" required multiple>
-            <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit" value="Envoyer">
+            <input class="bg-transparent cursor-pointer hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" type="file" name="files[]" required multiple>
+            <input class="ml-4 cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit" value="Envoyer">
         </form>
     </div>
     <br><hr><br>
@@ -36,8 +36,8 @@
     <!-- cropper picture -->
     <div id="effectFrame" class="flex flex-col justify-center w-full"></div>
 
-    <div class="flex justify-center col-gap-4 -mt-6 pb-12">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" id="jsonB">Valider vos cadrages</button>
+    <div class="flex justify-center col-gap-4 pb-8 pt-8">
+        <button id="Validate" class="bg-blue-500 cursor-not-allowed hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" id="jsonB">Valider vos cadrages</button>
         <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 border border-orange-700 rounded" id="jsonB"><a href="/">Retour à votre diaporama</a></button>
     </div>
 

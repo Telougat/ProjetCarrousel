@@ -14613,7 +14613,7 @@ var object = {};
 var infos = [];
 var finalJson = [];
 
-function getCropper(img, key, path) //Return crooper object
+function getCropper(img, key, path) //Return cropper object
 {
   return new Cropper(img, {
     viewMode: 3,
@@ -14685,7 +14685,7 @@ function toJson() {
     data: dataString,
     contentType: "application/json; charset=utf-8",
     success: function success(data) {
-      alert('Votre image ' + combine[0].name + ' a été ajoutée au diaporama');
+      window.location.href = '/';
     },
     error: function error(e) {
       console.log(e.message);
@@ -14694,6 +14694,8 @@ function toJson() {
 }
 
 $(document).ready(function () {
+  $('#Validate').attr('disabled', true);
+
   function imageToolsAnimations() {
     $("img").mouseenter(function () {
       $(this).next().removeClass('hidden');
@@ -14760,8 +14762,13 @@ $(document).ready(function () {
           var first = document.getElementById(i);
           var second = document.getElementById(i + 1);
           [].push.call(object, getCropper(first, i, $(this).data('link')));
-          [].push.call(object, getCropper(second, i + 1, $(this).data('link')));
-          makeSlideDeletable();
+          [].push.call(object, getCropper(second, i + 1, $(this).data('link'))); //makeSlideDeletable(); //TODO: Finish deletable function to delete slides
+
+          $('html, body').animate({
+            scrollTop: $('#Slide' + i).offset().top
+          }, 1500);
+          $('#Validate').removeClass('cursor-not-allowed');
+          $('#Validate').attr('disabled', false);
           i = i + 2;
         });
       },
