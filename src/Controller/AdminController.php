@@ -81,8 +81,6 @@ class AdminController extends AbstractController
         {
             return $this->redirectToRoute('loginget');
         }
-        
-        //return $this->render('login/login.html.twig');
     }
 
 
