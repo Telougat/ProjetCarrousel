@@ -18,8 +18,8 @@ $('document').ready(function(){
     let tl = gsap.timeline(); //Start other timeline animations (header, etc...)
     tl.from(".header", {duration :2, opacity: 0, scale: 0.3,  ease:"elastic"});
     tl.from(".loginButton", {duration :1, x: -1500, opacity: 0, scale: 0.3,  ease:"expo"}, "-=1");
-
-
+    tl.from("#boutonReplay", {duration :1, x: +1500, opacity: 0, scale: 0.3,  ease:"expo"}, "-=1");
+    tl.from("#boutonPause", {duration :1, x: -1500, opacity: 0, scale: 0.3,  ease:"expo"}, "-=1");
 
     function addImageToCarrousel(id, imagePath, data) //Function to create new div+image into the carrousel
     {
@@ -62,14 +62,51 @@ $('document').ready(function(){
     function addImageToTimeline(id, data) // Add image to a timeline
     {
         let image = document.getElementById('kenImage'+id);
-
+    
         image.onload = function()
         {
+ 
             carrouselTimeline.add(function(){ $('#kenDiv'+id).removeClass('hidden') }, ">0.1");
             carrouselTimeline.from("#kenDiv" + id, {duration :1.2, x: 2000, ease: "back"}, (">"));
             carrouselTimeline.call(launchKenEffect, [id, data.firstZoom, data.firstX, data.firstY, data.secondZoom, data.secondX, data.secondY, data.duration, document.getElementById('kenImage'+id).naturalWidth, document.getElementById('kenImage'+id).naturalHeight], "<");
             carrouselTimeline.to("#kenDiv" + id, {duration :1.2, x: -2000, ease: "back.in(1.7)"}, (">" + (data.duration-0.2)));
             carrouselTimeline.add(function(){ $('#kenDiv'+id).addClass('hidden') });
+
+            // function pause/play button
+            let pauseBtn = document.getElementById('boutonPause');
+            let replayBtn = document.getElementById('boutonReplay');
+            
+            $(pauseBtn).click(function() { 
+                if ($(this).text() == "Pause") { 
+                    $(this).text("Play");
+                    
+                    $(this).hover(function(){
+                        $(this).css("background-color", "#c05621");
+                        }, function(){
+                        $(this).css("background-color", "#ed8936");
+                      });
+                    carrouselTimeline.pause();
+                } else { 
+                    $(this).text("Pause");
+                    
+                    $(this).hover(function(){
+                        $(this).css("background-color", "#c05621");
+                        }, function(){
+                        $(this).css("background-color", "#ed8936");
+                      });
+                    carrouselTimeline.play();
+                }; 
+            });
+            // change text buttonPause/play during restart
+            $(replayBtn).click(function() {
+                if ($(pauseBtn).text() == "Play")
+                {
+                    $(pauseBtn).text("Pause");
+                }
+            });
+            
+            replayBtn.onclick = function() {carrouselTimeline.restart()};
+            
         }
     }
 

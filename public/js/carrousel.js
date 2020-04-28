@@ -20569,6 +20569,20 @@ $('document').ready(function () {
     scale: 0.3,
     ease: "expo"
   }, "-=1");
+  tl.from("#boutonReplay", {
+    duration: 1,
+    x: +1500,
+    opacity: 0,
+    scale: 0.3,
+    ease: "expo"
+  }, "-=1");
+  tl.from("#boutonPause", {
+    duration: 1,
+    x: -1500,
+    opacity: 0,
+    scale: 0.3,
+    ease: "expo"
+  }, "-=1");
 
   function addImageToCarrousel(id, imagePath, data) //Function to create new div+image into the carrousel
   {
@@ -20620,7 +20634,41 @@ $('document').ready(function () {
       }, ">" + (data.duration - 0.2));
       carrouselTimeline.add(function () {
         $('#kenDiv' + id).addClass('hidden');
+      }); // function pause/play button
+
+      var pauseBtn = document.getElementById('boutonPause');
+      var replayBtn = document.getElementById('boutonReplay');
+      $(pauseBtn).click(function () {
+        if ($(this).text() == "Pause") {
+          $(this).text("Play");
+          $(this).hover(function () {
+            $(this).css("background-color", "#c05621");
+          }, function () {
+            $(this).css("background-color", "#ed8936");
+          });
+          carrouselTimeline.pause();
+        } else {
+          $(this).text("Pause");
+          $(this).hover(function () {
+            $(this).css("background-color", "#c05621");
+          }, function () {
+            $(this).css("background-color", "#ed8936");
+          });
+          carrouselTimeline.play();
+        }
+
+        ;
+      }); // change text buttonPause/play during restart
+
+      $(replayBtn).click(function () {
+        if ($(pauseBtn).text() == "Play") {
+          $(pauseBtn).text("Pause");
+        }
       });
+
+      replayBtn.onclick = function () {
+        carrouselTimeline.restart();
+      };
     };
   }
 
@@ -20662,7 +20710,7 @@ $('document').ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/carrousel/resources/carrousel.js */"./resources/carrousel.js");
+module.exports = __webpack_require__(/*! D:\wamp\www\ProjetCarrousel\resources\carrousel.js */"./resources/carrousel.js");
 
 
 /***/ })

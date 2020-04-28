@@ -1,5 +1,7 @@
 const $ = require("jquery");
 const Cropper = require("cropperjs");
+import { gsap } from 'gsap';
+    
 
 let files = [];
 let i = 0;
@@ -78,6 +80,16 @@ function toJson()
 }
 
 $(document).ready(function() {
+
+    let tl = gsap.timeline(); //Start other timeline animations (header, etc...)
+    
+    tl.from(".dot1", {duration :1 , opacity: 0, y: 250, stagger:"0.25"});
+    tl.from(".dot2", {duration :1 , opacity: 0, y: -250, stagger:"0.25"},"-=1");
+    tl.from(".uploadImage", {duration :1 , opacity: 0 ,y: -250});
+    tl.from(".votreGallerie", {duration :1 , opacity: 0 ,x: -250},  "-=1");
+    tl.from(".gallerieImage", {duration :1 , opacity: 0 , x: 250, ease: "expo"});
+    tl.from(".retour", {duration :1 , opacity: 0 , x: 1500, ease: "sine"});
+    tl.from(".valider", {duration :1 , opacity: 0 , x: -1500, ease: "sine"},"-=1");
 
     $('.validateButton').attr('disabled', true);
 
@@ -161,49 +173,37 @@ $(document).ready(function() {
                         }
                     }
 
-                    if (already === true) //Dont push image into the slideshow because he is already present
+                    if (already === true && already === false ) //Dont push image into the slideshow because he is already present
                         return false; //TODO Notify user with a front message.
 
 
                     $('#effectFrame').append(
 
                     '<div id="Slide' + i + '" class="flex justify-center w-full my-24">' +
-
                         '<div class="lg:w-3/4 xl:w-1/2 mx-2 md:mx-0 p-8 border-2 rounded-lg">' +
-
-                        '<div class="md:flex ">' +
-
-                        '<div class="md:w-3/4 lg:w-1/2">' +
-                            '<img id="' + i + '" class="w-full" src="photos/' + $(this).data('link') + '">' +
-                        '</div>' +
-
-                        '<div class="md:w-3/4 lg:w-1/2 mt-2 md:mt-0 md:ml-2">' +
-                            '<img id="' + (i+1) + '" class="w-full" src="photos/' + $(this).data('link') + '">' +
-                            
-                        '</div>' +
-
-                        '</div>' +
-
-                        '<div class="mt-6 flex justify-center">' +
-
-                        '<div class="text-center">' +
-                            '<label>Durée d\'affichage (Secondes)</label><br>' +
-                            '<input id="duration' + i + '" type="number" value="2" class="text-right mt-2 border-2 px-1 border-black"><br>' +
-                            //'<button data-begin="' + i + '" class="deleteSlide bg-black text-white font-bold p-2 mt-8 rounded-lg">Supprimer cette slide</button>' +
-                    '</div>' +
-                            
-                    '</div>' +
-
-                    '</div>' +
-                    
+                            '<div class="md:flex ">' +
+                                '<div class="md:w-3/4 lg:w-1/2">' +
+                                    '<img id="' + i + '" class="w-full" src="photos/' + $(this).data('link') + '">' +
+                                '</div>' +
+                                '<div class="md:w-3/4 lg:w-1/2 mt-2 md:mt-0 md:ml-2">' +
+                                    '<img id="' + (i+1) + '" class="w-full" src="photos/' + $(this).data('link') + '">' + 
+                                '</div>' +
+                            '</div>' +
+                            '<div class="mt-6 flex justify-center">' +
+                                '<div class="text-center">' +
+                                    '<label>Durée d\'affichage (Secondes)</label><br>' +
+                                    '<input id="duration' + i + '" type="number" value="2" class="text-right mt-2 border-2 px-1 border-black"><br>' +
+                                    //'<button data-begin="' + i + '" class="deleteSlide bg-black text-white font-bold p-2 mt-8 rounded-lg">Supprimer cette slide</button>' +
+                                '</div>' +  
+                            '</div>' + 
+                        '</div>' + 
                     '</div>'
-                    
                     );
 
-
+                  
                     let first = document.getElementById(i);
                     let second = document.getElementById(i+1);
-
+   
                     [].push.call(object, getCropper(first, i, $(this).data('link')));
                     [].push.call(object, getCropper(second, i+1, $(this).data('link')));
 
@@ -212,8 +212,8 @@ $(document).ready(function() {
                     $('html, body').animate({
 
                         scrollTop: $('#Slide' + i).offset().top
-
-                    }, 1500);
+  
+                    }, 1500 , console.log(i));
 
 
                     $('.validateButton').removeClass('cursor-not-allowed');
@@ -245,7 +245,7 @@ $(document).ready(function() {
 
                         '<div class="imgTools hidden absolute top-0 w-full h-full flex flex-col justify-center items-center">' +
 
-                            '<button data-link="' + files[x] + '" class="selectButton cursor-pointer text-white font-bold text-2xl bg-red-500 p-2 rounded-lg">Sélectionner</button>' +
+                            '<button data-link="' + files[x] + '" class="selectButton cursor-pointer text-white font-bold text-2xl bg-blue-500 p-2 rounded-lg">Sélectionner</button>' +
 
                             '<button data-link="' + files[x] + '" class="deleteButton mt-4 cursor-pointer text-white font-bold text-2xl bg-red-500 p-2 rounded-lg">Supprimer</button>' +
 
@@ -263,6 +263,9 @@ $(document).ready(function() {
 
     $('#jsonB').click(function () {
         toJson();
+        
+        
+        
     });
 });
 

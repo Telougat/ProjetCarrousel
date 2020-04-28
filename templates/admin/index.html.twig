@@ -7,12 +7,32 @@
     <script src="js/files.js"></script>
 
     <link rel="stylesheet" href="css/cropper.min.css">
-    
-    <div class="flex items-center p-16 mb-8  bg-gray-400">
-        <h1 class="flex-1 text-center"style="font-size : 50px">Interface admin</h1>
-    </div>
+    <style>
+.dot {
+  height: 50px;
+  width: 50px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  
+}
 
-    <div class="flex justify-center">
+</style>
+    
+    <div class="p-16 mb-8  bg-gray-400">
+        <h1 class="text-center"style="font-size : 50px">Interface Admin </h1>
+        
+        <div class="flex justify-center mt-4 col-gap-20">
+            <span style ="background-color : #4299e1" class="dot dot1"></span>
+            <span style ="background-color : #ed8936" class="dot dot2"></span>
+            <span style ="background-color : #4299e1" class="dot dot1"></span>
+            <span style ="background-color : #ed8936" class="dot dot2"></span>
+            
+        </div>
+    </div>
+    
+    
+    <div class="uploadImage flex justify-center">
         <form action="/upload" method="post" enctype="multipart/form-data">
             <label>Sélectionner un ou plusieurs fichier(s) :</label>
             <input class="bg-transparent cursor-pointer hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" type="file" name="files[]" required multiple>
@@ -21,27 +41,29 @@
     </div>
     <br><hr><br>
 
-    <div class="flex justify-center bg-gray-200">
+    <div class="votreGallerie flex justify-center bg-gray-200">
         <h2 style="font-size : 30px; ">Votre gallerie</h2>
     </div>
-    <div class="flex justify-center bg-gray-200">
+    <div class="votreGallerie flex justify-center bg-gray-200">
         <p>Sélectionner une image pour la recadrer</p>
     </div>
     <br><hr><br>
 
     <!-- pictures's galleria -->
-    <div id="list" class="w-full flex col-gap-4"></div>
+    <div id="list" class="gallerieImage w-full flex col-gap-4"></div>
     <br><hr><br>
 
     <!-- cropper picture -->
     <div id="effectFrame" class="flex flex-col justify-center w-full"></div>
 
     <div class="flex justify-center col-gap-4 pb-8 pt-8">
-        <button id="jsonB" class="bg-blue-500 cursor-not-allowed hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded validateButton">Valider vos cadrages</button>
-        <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 border border-orange-700 rounded" id="jsonB"><a href="/">Retour à votre diaporama</a></button>
+        <button  id="jsonB" class="valider bg-blue-500 cursor-not-allowed hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded validateButton">Valider vos cadrages</button>
+        <button class="retour bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 border border-orange-700 rounded"><a href="/">Retour à votre diaporama</a></button>
     </div>
 
 <!-- footer-->
 <div class ="p-40 mt-8 bg-gray-400"></div>
 
+
 {% endblock %}
+
